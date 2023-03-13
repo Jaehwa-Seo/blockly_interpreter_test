@@ -1,5 +1,5 @@
 const home = function(req, res) {
-    res.json({"message": "Welcome to our Node tutorial"});
+    res.render("blockly_interpreter_test",{});
  }
   
  module.exports = {
