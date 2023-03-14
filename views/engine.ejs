@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+<head>
+
+    <style>
+        body {
+        margin: 0;
+        background-color: black;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        height: 100vh;
+      }
+        </style>
+        <canvas></canvas>
+        <!-- <script src="https://main.codingfamily.co.kr/content/user/odel/sprites_fbx/info.js"></script> -->
+        
+
+</head>
+<body style="background-color: #A3C6C4;"></body>
+
+
+<script>
+  var level = parseInt(<%- JSON.stringify(content.level)%>) - 1;
+</script>
+
+<script src="/engine/EngineTools.js"></script>
+<script src="/engine/CameraManager.js"></script>
+<script src="/engine/BackgroundManager.js"></script>
+<script src="/engine/SpriteManager.js"></script>
+<script src="/engine/PartnerManager.js"></script>
+<script src="/engine/PlatformManager.js"></script>
+<script src="/engine/StageManager.js"></script>
+<script src="/engine/PlayerManager.js"></script>
+<script src="/engine/TargetManager.js"></script>
+<script src="/engine/spriteData.js"></script>
+
+<script src="/engine/EngineManager.js"></script>
+
+
+</body>
+</html>

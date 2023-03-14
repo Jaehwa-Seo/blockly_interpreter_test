@@ -6,4 +6,7 @@ const router = express.Router();
 
 router.get("/", HomeController.home );
 
+router.get("/coding", HomeController.coding );
+router.get("/engine", HomeController.engine );
+
 module.exports = router;

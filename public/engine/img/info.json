@@ -1,0 +1,42 @@
+[
+  {
+    "Defeat": {
+      "img": "Defeat.png",
+      "width": 25300,
+      "height": 292,
+      "items": 220
+    }
+  },
+  {
+    "Idle": {
+      "img": "Idle.png",
+      "width": 7320,
+      "height": 282,
+      "items": 60
+    }
+  },
+  {
+    "Jump": {
+      "img": "Jump.png",
+      "width": 7378,
+      "height": 409,
+      "items": 31
+    }
+  },
+  {
+    "Running": {
+      "img": "Running.png",
+      "width": 4480,
+      "height": 292,
+      "items": 20
+    }
+  },
+  {
+    "Victory": {
+      "img": "Victory.png",
+      "width": 53713,
+      "height": 292,
+      "items": 257
+    }
+  }
+]

@@ -1,0 +1,255 @@
+/* Split the screen in half */
+.split {
+    height: 100%;
+    width: 50%;
+    position: fixed;
+    z-index: 1;
+    top: 0;
+    overflow-x: hidden;
+    padding-top: 20px;
+}
+
+/* Control the left side */
+.left {
+    left: 0;
+
+    height: 100%;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+
+    background-color: #FFFFFF;
+
+}
+
+/* Control the right side */
+.right {
+    right: 0;
+    margin: 0;
+    padding: 0;
+    border: 0;
+
+    background-color: #FFFFFF;
+}
+
+/* If you want the content centered horizontally and vertically */
+.centered {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    text-align: center;
+}
+
+/* Style the image inside the centered container, if needed */
+.centered img {
+    width: 150px;
+    border-radius: 50%;
+}
+
+#top_menu_left {
+    height: auto;
+    width: 100%;
+    background-color: #E0E7E9;
+}
+
+#block_code {
+    width: 100%;
+    flex-grow: 1;
+}
+
+/* #run_button {
+    padding:  6px 12px;
+} */
+
+.top_menu_button {
+    /* padding:  6px 12px; */
+    color: #2441ff !important;
+    border-color: #000 !important;
+}
+
+.top_menu_button:hover {
+    /* padding:  6px 12px; */
+    background-color: rgb(200, 200, 200) !important;
+}
+
+#next_level_button {
+    /* display:inline-block; */
+    display:none;
+    margin: 0;
+    float: right;
+}
+
+#iframe_result {
+    overflow:hidden;
+    height:100%;
+    width:100%
+}
+
+
+/* VICTORY */
+#victory_canvas{
+    height: 99%;
+    width: 99%;
+    margin: 0;
+    background-color: black;
+  }
+
+#block_left_div_p {
+    float:left;
+    display:inline-block;
+    height:100%;
+    padding:7px 0px;
+    min-width:60px;
+}
+#block_left_div_button {
+    float:left;
+    height:100%;
+    min-width:150px;
+}
+#block_left_p {
+    display: inline;
+    margin-left: 20px;
+    color: #2441ff;
+}
+
+#hint_button {
+    float: right;
+    margin-right: 10px;
+}
+#javascript_button {
+    float: right;
+    margin-right: 10px;
+}
+
+
+.blocklyDisabled>.blocklyPath {
+    fill: rgb(57, 56, 56);
+}
+
+
+#clear_div{
+    display:none;
+}
+#clear_panel {
+    z-index:1;
+    position:absolute;
+    width:100%;
+    height:100%;
+    background-color:#000;
+    opacity:0.6;
+}
+.clear_window {
+    z-index:2;
+    position:fixed;
+    width:40vw;
+    height:50vh;
+    left:50%;
+    top:50%;
+    margin-left:-20vw;
+    margin-top:-25vh;
+    border-radius:20px;
+    background-color:#fff;
+}
+.clear_window_div{
+    margin:auto;
+}
+.clear_top_div {
+    width:38vw;
+    height:10vh;
+}
+#clear_top_div_title {
+    width:30vw;
+    height:10vh;
+    float:left;
+    font-size:3vmin;
+    color:orange;
+    padding-top:2.5vmin;
+    padding-left:3vmin;
+}
+#clear_top_div_close {
+    width:5vw;
+    height:10vh;
+    float:left;
+    text-align:center;
+    padding-top:3vmin;
+    padding-left:5vmin;
+}
+.clear_close_button {
+    position:relative;
+    float:left;
+    display:inline-block;
+    *display:inline;
+    text-align:center;
+    margin-right:1vmin;
+}
+.clear_close_button1:after {
+    content: "\00d7"; 
+    font-size:6vmin;
+    line-height:2.5vmin;
+}
+.clear_middle_img_div {
+    width:38vw;
+    height:22vh;
+    padding:1vh 0;
+    text-align:center;
+}
+.clear_middle_img_div img {
+    width:18vmin;
+}
+.clear_middle_data_div {
+    background-color:rgb(48, 48, 48);
+    width:38vw;
+    height:8vh;
+    padding:1.3vh 0;
+}
+.clear_middle_data_div div{
+    width:10vw;
+    height:6vh;
+    float:left;
+    padding:1vh 0;
+    text-align:center;
+    font-size:2vmin;
+    color:#fff;
+}
+.clear_middle_data_div div img{
+    width:3vmin;
+}
+#clear_time{
+    margin:0 2vw;
+}
+#clear_coin{
+    margin-right:2vw;
+}
+
+.clear_bottom_div{
+    width:38vw;height:10vh;
+}
+
+.clear_bottom_div div{
+    width:18.5vw;
+    height:8vh;
+    margin-top:1vh;
+    float:left;
+    font-size:3vmin;
+    text-align:center;
+    padding-top:1.8vmin;
+    color:#fff;
+}
+
+#clear_bottom_div_retry_button{
+    margin-right:1vw;
+    background-color:#9b9b9b;
+}
+#clear_bottom_div_next_button{
+    background-color:orange;
+}
+
+.button_div{
+    cursor:pointer;
+}
+
+.round_div{
+    border-radius: 20px;
+}
