@@ -8,6 +8,11 @@ const home = function(req, res) {
     res.render("blockly_interpreter_test",{});
 }
 
+const test = function(req, res) {
+    res.render("blockly_test",{});
+}
+
+
  const coding = function(req, res) {
     const content = {
         "level": 1,
@@ -35,6 +40,7 @@ const home = function(req, res) {
   
  module.exports = {
      home,
+     test,
      coding,
      engine,
  }
