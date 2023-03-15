@@ -79,7 +79,7 @@ let levelsPlatformSprites = [
 ]
 
 var levelsPlayerAnimationList = [
-    ["Idle","Running","Defeat","Victory","IdleCustom1","Jump","VictoryCustom1"],
+    ["Idle","Running","Defeat","Victory"],
     ["Idle","Running","Defeat","Victory"],
     ["Idle","Jump","Defeat","Victory"],
     ["Idle","Running","Jump","Defeat","Victory"],

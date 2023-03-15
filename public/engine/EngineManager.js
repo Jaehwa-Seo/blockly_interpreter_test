@@ -107,9 +107,7 @@ async function Loading()
     {
         await sleep(10)
     }
-
-    console.log(player.sprites)
-
+    
     SceneReset(true)
     Animate()
     SpriteAnimate()
@@ -225,8 +223,8 @@ async function CheckResult()
         if(player.position.x === goalPosition.x && player.position.y === goalPosition.y)
         {
             isWin = true;
-            player.currentState = 'IdleCustom1'
-            player.sprites['IdleCustom1'].frames = 0
+            player.currentState = 'Victory'
+            player.sprites['Victory'].frames = 0
             partner.currentState = 'Victory'
         }
         else

@@ -9,10 +9,8 @@ Blockly.Blocks['run_block'] = {
 };
 
 Blockly.JavaScript['run_block'] = function(block) {
-    // return "if (! await Run()) { return;}";
-    return ""
-    + "/*_*/if (! await /*_*/"
-    + "Run()"
-    + "/*_*/) { return;}/*_*/"
-    + "/*_;_*/\n"; // fix: indentation
+    var code = 'if(! await Run()) { return; }'
+    // var code = 'console.log("test")'
+
+    return code;
 };
