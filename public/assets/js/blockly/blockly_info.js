@@ -80,6 +80,9 @@
     if (typeof default_xml_text !== "undefined" && default_xml_text) {
         try {
             var dom = Blockly.Xml.textToDom(default_xml_text);
+            console.log(default_xml_text)
+            console.log(dom)
+            console.log(workspace)
             Blockly.Xml.domToWorkspace(workspace, dom);
             // return true;
         } catch (e) {

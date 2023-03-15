@@ -22,6 +22,7 @@ function run_code() {
 
     var my_code = Blockly.JavaScript.workspaceToCode(myMainWorkSpace);
 
+    var myInterpreter = new Interpreter(my_code, initApi);
     window.onbeforeunload=function(){return ""};
 
     iframe_result_code.run_code(simulation_code, my_code, function(err, is_success) {
