@@ -262,16 +262,14 @@ function resetStepUi(clearOutput) {
 
 function stepCode() {
   if (!myInterpreter) {
-    // First statement of this code.
-    // Clear the program output.
+
     resetStepUi(true);
     const latestCode = Blockly.JavaScript.workspaceToCode(workspace);
     console.log(latestCode)
     myInterpreter = new Interpreter(latestCode, initApi);
 
-    // And then show generated code in an alert.
-    // In a timeout to allow the outputArea.value to reset first.
-    console.log(latestCode)
+    SceneReset();
+
     setTimeout(function() {
       highlightPause = true;
       stepCode();
@@ -303,14 +301,24 @@ function stepCode() {
   } while (hasMoreCode && !highlightPause);
 }
 
+async function SceneReset()
+{
+    iframe_result_code.SceneReset(false);
+    await iframe_result_code.sleep(400)
+}
+
 async function Run()
 {
+    stepButton.disabled = 'disabled';
     await iframe_result_code.Run();
     iframe_result_code.Idle();
+    stepButton.disabled = '';
 }
 
 async function Jump()
 {
+    stepButton.disabled = 'disabled';
     await iframe_result_code.Jump();
     iframe_result_code.Idle();
+    stepButton.disabled = '';
 }
