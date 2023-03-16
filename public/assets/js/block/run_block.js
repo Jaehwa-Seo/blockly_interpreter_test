@@ -9,8 +9,6 @@ Blockly.Blocks['run_block'] = {
 };
 
 Blockly.JavaScript['run_block'] = function(block) {
-    var code = 'if(! await Run()) { return; }'
-    // var code = 'console.log("test")'
-
+    var code ="Run();"
     return code;
 };

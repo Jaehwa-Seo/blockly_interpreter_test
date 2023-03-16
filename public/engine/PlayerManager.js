@@ -97,7 +97,7 @@ async function Run()
     player.velocity.x = 0
 
     var isFail = await CheckFalling()
-
+    
     return !isFail
 }
 
@@ -114,6 +114,10 @@ async function Jump()
     return !isFail
 }
 
+function Idle()
+{
+    player.currentState='Idle';
+}
 // async function DoubleJump()
 // {
 //   targetX = player.position.x + blockSize

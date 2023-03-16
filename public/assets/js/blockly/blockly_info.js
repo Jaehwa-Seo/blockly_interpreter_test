@@ -23,6 +23,8 @@
 
  const code_info_div = document.getElementById("code_info_div");
  var code_info_content = document.getElementById("code_info_content");
+ var workspace;
+ var stepButton = document.getElementById("stepButton")
 
  document.addEventListener("DOMContentLoaded", function () {
 
@@ -74,22 +76,25 @@
         workspaceInfo["maxBlocks"] = max_blocks;
     }
 
-    var workspace = Blockly.inject('blocklyDiv', workspaceInfo);
+    workspace = Blockly.inject('blocklyDiv', workspaceInfo);
 
+    Blockly.JavaScript.STATEMENT_SUFFIX = 'highlightBlock(%1);';
+    Blockly.JavaScript.addReservedWords('highlightBlock');
+    
     //Load Default blocks if exists
-    if (typeof default_xml_text !== "undefined" && default_xml_text) {
-        try {
-            var dom = Blockly.Xml.textToDom(default_xml_text);
-            console.log(default_xml_text)
-            console.log(dom)
-            console.log(workspace)
-            Blockly.Xml.domToWorkspace(workspace, dom);
-            // return true;
-        } catch (e) {
-            // return false;
-            console.log(e);
-        }
-    }
+    // if (typeof default_xml_text !== "undefined" && default_xml_text) {
+    //     try {
+    //         var dom = Blockly.Xml.textToDom(default_xml_text);
+    //         console.log(default_xml_text)
+    //         console.log(dom)
+    //         console.log(workspace)
+    //         Blockly.Xml.domToWorkspace(workspace, dom);
+    //         // return true;
+    //     } catch (e) {
+    //         // return false;
+    //         console.log(e);
+    //     }
+    // }
 
       Blockly.mainWorkspace.addChangeListener(onEventWorkspace);
 
@@ -201,4 +206,111 @@ function display_hint(level) {
     } else {
         hint_div.style.display = "none";
     }
+}
+
+function initApi(interpreter, globalObject) {
+    // Add an API function for the alert() block.
+    var wrapper = function(text) {
+        return alert(arguments.length ? text : '');
+    };
+    interpreter.setProperty(globalObject, 'alert',
+        interpreter.createNativeFunction(wrapper));
+
+    // Add an API function for the prompt() block.
+    wrapper = function(text) {
+        return prompt(text);
+    };
+    interpreter.setProperty(globalObject, 'prompt',
+        interpreter.createNativeFunction(wrapper));
+
+    const wrapperRun = function() {
+        return Run(); 
+    };
+    interpreter.setProperty(globalObject, 'Run',
+        interpreter.createNativeFunction(wrapperRun));
+
+    const wrapperJump = function() {
+        return Jump();
+    };
+    interpreter.setProperty(globalObject, 'Jump',
+        interpreter.createNativeFunction(wrapperJump));
+
+    const wrapperHighlight = function(id) {
+        id = String(id || '');
+        return highlightBlock(id);
+    };
+    interpreter.setProperty(globalObject, 'highlightBlock',
+    interpreter.createNativeFunction(wrapperHighlight));
+
+   
+}
+
+let highlightPause = false;
+
+function highlightBlock(id) {
+    highlightPause = true;
+    workspace.highlightBlock(id);
+}
+
+var myInterpreter;
+
+function resetStepUi(clearOutput) {
+    workspace.highlightBlock(null);
+    highlightPause = false;
+    myInterpreter = null;
+}
+
+function stepCode() {
+  if (!myInterpreter) {
+    // First statement of this code.
+    // Clear the program output.
+    resetStepUi(true);
+    const latestCode = Blockly.JavaScript.workspaceToCode(workspace);
+    console.log(latestCode)
+    myInterpreter = new Interpreter(latestCode, initApi);
+
+    // And then show generated code in an alert.
+    // In a timeout to allow the outputArea.value to reset first.
+    console.log(latestCode)
+    setTimeout(function() {
+      highlightPause = true;
+      stepCode();
+    }, 1);
+    return;
+  }
+
+  highlightPause = false;
+  let hasMoreCode;
+  do {
+    try {
+      hasMoreCode = myInterpreter.step();
+    } finally {
+      if (!hasMoreCode) {
+        // Program complete, no more code to execute.
+        resetStepUi(false);
+        // Cool down, to discourage accidentally restarting the program.
+        stepButton.disabled = 'disabled';
+        setTimeout(function() {
+          stepButton.disabled = '';
+        }, 2000);
+
+        myInterpreter = null;
+        return;
+      }
+    }
+    // Keep executing until a highlight statement is reached,
+    // or the code completes or errors.
+  } while (hasMoreCode && !highlightPause);
+}
+
+async function Run()
+{
+    await iframe_result_code.Run();
+    iframe_result_code.Idle();
+}
+
+async function Jump()
+{
+    await iframe_result_code.Jump();
+    iframe_result_code.Idle();
 }

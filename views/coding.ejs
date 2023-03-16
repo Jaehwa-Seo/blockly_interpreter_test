@@ -33,6 +33,9 @@
                 <div style="float:left;height:100%;width:80px;margin-left:10px">
                     <button type="button" class="btn top_menu_button" id="reset_button" style="width:100%; display: none;" onclick="reset()" style="align:left"></button>
                 </div>
+                <div style="float:left;height:100%;width:80px;margin-left:10px">
+                    <button type="button" class="btn top_menu_button" id="stepButton" style="width:100%;" onclick="stepCode()" style="align:left">step</button>
+                </div>
             </div>
             <div id="block_left_div_p">
             <p id="block_left_p"></p>
@@ -105,6 +108,7 @@
     <!-- BLOCKLY -->
 
     <script src="./assets/js/blockly/blockly.min.js"></script>
+
     <!-- <script src="https://unpkg.com/blockly/blockly.min.js"></script> -->
     <!-- <script src="./js/blockly_compressed.js"></script>
     <script src="./js/javascript_compressed.js"></script> -->
@@ -151,44 +155,6 @@
 
 
     <script src="./assets/js/hints.js"></script>
-
-    <script>
-        function initApi(interpreter, globalObject) {
-            // Add an API function for the alert() block, generated for "text_print" blocks.
-            const wrapperAlert = function alert(text) {
-                text = arguments.length ? text : '';
-                outputArea.value += '\n' + text;
-            };
-            
-
-            console.log
-            interpreter.setProperty(globalObject, 'alert',
-                interpreter.createNativeFunction(wrapperAlert));
-
-            // Add an API function for the prompt() block.
-            const wrapperPrompt = function prompt(text) {
-                return window.prompt(text);
-            };
-            interpreter.setProperty(globalObject, 'prompt',
-                interpreter.createNativeFunction(wrapperPrompt));
-
-            // Add an API function for highlighting blocks.
-            const wrapper = function(id) {
-                id = String(id || '');
-                return highlightBlock(id);
-            };
-
-            demoWorkspce.addChangeListener(function(event) {
-                if(!event.isUiEvent)
-                    resetStepUi(true);
-            })
-            interpreter.setProperty(globalObject, 'highlightBlock',
-                interpreter.createNativeFunction(wrapper));
-
-            // Add an API for the wait block.  See wait_block.js
-            initInterpreterWaitForSeconds(interpreter, globalObject);
-        }
-    </script>
 
     <script src="./assets/js/run_iframe_script.js"></script>
 

@@ -15,9 +15,9 @@ const test = function(req, res) {
 
  const coding = function(req, res) {
     const content = {
-        "level": 1,
+        "level": 8,
         "max_level": 8,
-        "block_list": block_list[1],
+        "block_list": block_list[8],
     }
 
     res.render("coding",{"content": content});
@@ -28,7 +28,7 @@ const test = function(req, res) {
     // tools_studio_manager.get_3d_model(studiomanager_id, function(is_success, err, _3d_model){
     //     if (is_success) {
     const content = {
-        "level": 1,
+        "level": 8,
     }
 
     res.render("engine",{"content": content});                

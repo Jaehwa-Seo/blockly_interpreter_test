@@ -10,19 +10,17 @@ const clear_div = document.getElementById("clear_div");
 
 const myMainWorkSpace = Blockly.getMainWorkspace();
 
+
+var myInterpreter;
+
 function run_code() {
     run_button.disabled = true;
     reset_button.disabled = true;
 
     var simulation_code = make_simulation_code_code()
+
+    const my_code = Blockly.JavaScript.workspaceToCode(myMainWorkSpace);
     
-    // trace the executing block.
-    Blockly.JavaScript.addReservedWords('highlightBlock');
-    Blockly.JavaScript.STATEMENT_PREFIX = 'await highlightBlock(%1);\n';
-
-    var my_code = Blockly.JavaScript.workspaceToCode(myMainWorkSpace);
-
-    var myInterpreter = new Interpreter(my_code, initApi);
     window.onbeforeunload=function(){return ""};
 
     iframe_result_code.run_code(simulation_code, my_code, function(err, is_success) {
@@ -33,10 +31,6 @@ function run_code() {
         if (err) {
             // document.body.style.backgroundColor = "#FF0000";
         } else {
-            // unhighlight the last executed block.
-            if (Blockly.mainWorkspace.highlightedBlocks_.length > 0) {
-                Blockly.mainWorkspace.highlightedBlocks_[0].setHighlighted(false);
-            }
             if (is_success) {
                 // document.body.style.backgroundColor = "#00BFFF";
                 resultTime = iframe_result_code.TimeCalculator();
@@ -228,6 +222,8 @@ function make_simulation_code_code() {
 
     return code
 }
+
+
 
 
 // function display_javascript() {

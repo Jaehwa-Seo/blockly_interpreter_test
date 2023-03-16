@@ -11,11 +11,8 @@ Blockly.Blocks['jump_block'] = {
 // Blockly.BlockSvg.INLINE_PADDING_Y and Blockly.BlockSvg.MIN_BLOCK_Y
 
 Blockly.JavaScript['jump_block'] = function(block) {
-    // return "if (! await Jump()) { return;}";
-    return ""
-    + "/*_*/if (! await /*_*/"
-    + "Jump()"
-    + "/*_*/) { return;}/*_*/"
-    + "/*_;_*/\n"; // fix: indentation
+    var code ="Jump();"
+
+    return code;
 };
 
