@@ -301,6 +301,47 @@ function stepCode() {
   } while (hasMoreCode && !highlightPause);
 }
 
+function runCode() {
+    if (!myInterpreter) {
+  
+      resetStepUi(true);
+      const latestCode = Blockly.JavaScript.workspaceToCode(workspace);
+      console.log(latestCode)
+      myInterpreter = new Interpreter(latestCode, initApi);
+  
+      SceneReset();
+  
+      setTimeout(function() {
+        highlightPause = true;
+        runCode();
+      }, 1);
+      return;
+    }
+  
+    highlightPause = false;
+    let hasMore;
+    do {
+      try {
+        hasMore = myInterpreter.run();
+      } finally {
+        if (!hasMore) {
+          // Program complete, no more code to execute.
+          resetStepUi(false);
+          // Cool down, to discourage accidentally restarting the program.
+          run_button.disabled = 'disabled';
+          setTimeout(function() {
+            run_button.disabled = '';
+          }, 2000);
+  
+          myInterpreter = null;
+          return;
+        }
+      }
+      // Keep executing until a highlight statement is reached,
+      // or the code completes or errors.
+    } while (hasMoreCode && !highlightPause);
+  }
+
 async function SceneReset()
 {
     iframe_result_code.SceneReset(false);
@@ -309,6 +350,7 @@ async function SceneReset()
 
 async function Run()
 {
+    console.log("!11111111111111")
     stepButton.disabled = 'disabled';
     await iframe_result_code.Run();
     iframe_result_code.Idle();
@@ -317,6 +359,7 @@ async function Run()
 
 async function Jump()
 {
+    console.log("!2222222222222222")
     stepButton.disabled = 'disabled';
     await iframe_result_code.Jump();
     iframe_result_code.Idle();

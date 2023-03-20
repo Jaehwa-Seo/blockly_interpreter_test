@@ -36,7 +36,7 @@ class Player {
                 }
                 
                 var sprite = new Sprite(spriteHeight,spriteWidth,image[spriteName],spriteName,img_data[spriteName]["width"]/img_data[spriteName]["items"],img_data[spriteName]["height"],img_data[spriteName]["items"]-1,spriteHeightDifference)
-
+                console.log(image)
                 this.sprites[spriteName] = sprite
             })
         }
