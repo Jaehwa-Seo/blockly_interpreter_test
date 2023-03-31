@@ -224,16 +224,22 @@ function initApi(interpreter, globalObject) {
         interpreter.createNativeFunction(wrapper));
 
     const wrapperRun = function() {
-        return Run(); 
+        return CheckMoving("Run"); 
     };
     interpreter.setProperty(globalObject, 'Run',
         interpreter.createNativeFunction(wrapperRun));
 
     const wrapperJump = function() {
-        return Jump();
+        return CheckMoving("Jump");
     };
     interpreter.setProperty(globalObject, 'Jump',
         interpreter.createNativeFunction(wrapperJump));
+
+    // const wrapperMove = function() {
+    //         return 
+    //     };
+    // interpreter.setProperty(globalObject, 'CheckMoving',
+    //     interpreter.createNativeFunction(wrapperMove));
 
     const wrapperHighlight = function(id) {
         id = String(id || '');
@@ -348,20 +354,33 @@ async function SceneReset()
     await iframe_result_code.sleep(400)
 }
 
+var isMoving = true;
 async function Run()
 {
+    isMoving = true;
     console.log("!11111111111111")
     stepButton.disabled = 'disabled';
     await iframe_result_code.Run();
     iframe_result_code.Idle();
     stepButton.disabled = '';
+    isMoving = false;
 }
 
 async function Jump()
 {
-    console.log("!2222222222222222")
+    isMoving = true;
+    console.log("!222222222222222")
     stepButton.disabled = 'disabled';
     await iframe_result_code.Jump();
     iframe_result_code.Idle();
     stepButton.disabled = '';
+    isMoving = false;
+}
+
+async function CheckMoving(actionName)
+{
+    if(actionName == "Run")
+        await Run();
+    else if(actionName == "Jump")
+        await Jump();
 }

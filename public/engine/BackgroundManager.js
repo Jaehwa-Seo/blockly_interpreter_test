@@ -26,7 +26,6 @@ class GenericObject {
   
 
   draw(cameraPosition) {
-      console.log(this.image)
       c.drawImage(this.image,this.position.x-cameraPosition.x/3,this.position.y-cameraPosition.y/3,this.width,this.height)
   }
 
